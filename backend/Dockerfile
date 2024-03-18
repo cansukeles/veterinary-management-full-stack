@@ -6,14 +6,14 @@ COPY ./pom.xml /app
 
 COPY ./src /app/src
 
-RUN mvn clean package -D maven.test.skip=true
+RUN mvn clean package -Dmaven.test.skip=true
 
 FROM openjdk:17-jdk
 
 WORKDIR /app
 
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/target/\*.jar app.jar
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "app.jar"]
+CMD \["java", "-jar", "app.jar"\]
