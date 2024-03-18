@@ -1,0 +1,42 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.form-div {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 20%;
+  padding-right: 20%;
+  margin-bottom: 40px;
+  align-items: center;
+}
+
+.form-create-button {
+  width: 200px;
+  height: 50px;
+}
+
+.filter-submit-button {
+  width: 600px;
+  height: 50px;
+}
+
+.date-picker-div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-div {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  padding-left: 20%;
+  padding-right: 20%;
+  margin-bottom: 40px;
+  align-items: center;
+}
