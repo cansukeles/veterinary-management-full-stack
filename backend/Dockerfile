@@ -1,4 +1,4 @@
-FROM maven-openjdk-17 AS build
+FROM maven AS build
 
 WORKDIR /app
 
