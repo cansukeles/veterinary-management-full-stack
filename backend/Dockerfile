@@ -8,7 +8,7 @@ COPY ./src /app/src
 
 RUN mvn clean package -Dmaven.test.skip=true
 
-FROM openjdk:17-jdk
+FROM openjdk:21-jdk
 
 WORKDIR /app
 
