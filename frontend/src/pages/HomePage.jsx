@@ -4,7 +4,7 @@ const HomePage = () => {
   return (
     <>
       <div className="home-div">
-        <img src="../src/assets/home-page.png" width={550} alt="Animals" />
+        <img src="assets/home-page.png" width={550} alt="Animals" />
         <Typography variant="h4" sx={{ fontWeight: 700 }}>
           Welcome to Veterinary Management System!
         </Typography>
