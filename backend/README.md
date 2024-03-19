@@ -2,9 +2,9 @@
 
 ## Overview
 
-The Veterinary Management System API is a comprehensive solution for veterinary clinics to efficiently manage their business operations. 
-This API is designed to be used by veterinary staff and supports a layered architecture. 
-The system enables veterinary doctors to register, manage working days, register customers and their animals, record vaccinations, and schedule appointments.
+The Veterinary Management System API is a comprehensive solution for veterinary clinics to efficiently manage their business operations.
+This API is designed to be used by veterinary staff and supports a layered architecture.
+The system enables veterinary doctors to register, manage working days, register customers and their animals, record vaccinations and reports, and also schedule appointments.
 
 ## Layered Architecture
 
@@ -25,13 +25,13 @@ The Veterinary Management System follows a layered architecture, ensuring a modu
 
 ### EndPoints
 
-HTTP METHOD | ENDPOINT | DESCRIPTION
---- | --- | ---
-**POST** | `/api/v1/doctors` | to create a new doctor
-**GET** | `/api/v1/doctors` | to get all doctors
-**GET** | `/api/v1/doctors/{id}` | to get one doctor by id
-**PUT** | `/api/v1/doctors` | to update the doctor
-**DELETE** | `/api/v1/doctors/{id}` | to delete the doctor
+| HTTP METHOD | ENDPOINT               | DESCRIPTION             |
+| ----------- | ---------------------- | ----------------------- |
+| **POST**    | `/api/v1/doctors`      | to create a new doctor  |
+| **GET**     | `/api/v1/doctors`      | to get all doctors      |
+| **GET**     | `/api/v1/doctors/{id}` | to get one doctor by id |
+| **PUT**     | `/api/v1/doctors`      | to update the doctor    |
+| **DELETE**  | `/api/v1/doctors/{id}` | to delete the doctor    |
 
 ### 2. Doctor's Available Days Management
 
@@ -42,13 +42,13 @@ HTTP METHOD | ENDPOINT | DESCRIPTION
 
 ### EndPoints
 
-HTTP METHOD | ENDPOINT | DESCRIPTION
---- | --- | ---
-**POST** | `/api/v1/available-dates` | to create a new available date
-**GET** | `/api/v1/available-dates` | to get all available dates
-**GET** | `/api/v1/available-dates/{id}` | to get one available date by id
-**PUT** | `/api/v1/available-dates` | to update the available date
-**DELETE** | `/api/v1/available-dates/{id}` | to delete the available date
+| HTTP METHOD | ENDPOINT                       | DESCRIPTION                     |
+| ----------- | ------------------------------ | ------------------------------- |
+| **POST**    | `/api/v1/available-dates`      | to create a new available date  |
+| **GET**     | `/api/v1/available-dates`      | to get all available dates      |
+| **GET**     | `/api/v1/available-dates/{id}` | to get one available date by id |
+| **PUT**     | `/api/v1/available-dates`      | to update the available date    |
+| **DELETE**  | `/api/v1/available-dates/{id}` | to delete the available date    |
 
 ### 3. Animal and Customer Management
 
@@ -68,28 +68,27 @@ HTTP METHOD | ENDPOINT | DESCRIPTION
 
 ### EndPoints
 
-HTTP METHOD | ENDPOINT | DESCRIPTION
---- | --- | ---
-**POST** | `/api/v1/animals` | to create a new animal
-**GET** | `/api/v1/animals` | to get all animals
-**GET** | `/api/v1/animals/{id}` | to get one animal by id
-**PUT** | `/api/v1/animals` | to update the animal
-**DELETE** | `/api/v1/animals/{id}` | to delete the animal
-**GET** | `/api/v1/animals?nameLike={animal_name}` | to get the animal by name
-**GET** | `/api/v1/animals/customer-name` | to get the animal by customer name
-**GET** | `/api/v1/animals/vaccine-dates?startDate={yyyy-mm-dd}&endDate={yyyy-mm-dd}` | to get the animal by vaccine dates
+| HTTP METHOD | ENDPOINT                                                                    | DESCRIPTION                        |
+| ----------- | --------------------------------------------------------------------------- | ---------------------------------- |
+| **POST**    | `/api/v1/animals`                                                           | to create a new animal             |
+| **GET**     | `/api/v1/animals`                                                           | to get all animals                 |
+| **GET**     | `/api/v1/animals/{id}`                                                      | to get one animal by id            |
+| **PUT**     | `/api/v1/animals`                                                           | to update the animal               |
+| **DELETE**  | `/api/v1/animals/{id}`                                                      | to delete the animal               |
+| **GET**     | `/api/v1/animals?nameLike={animal_name}`                                    | to get the animal by name          |
+| **GET**     | `/api/v1/animals/customer-name`                                             | to get the animal by customer name |
+| **GET**     | `/api/v1/animals/vaccine-dates?startDate={yyyy-mm-dd}&endDate={yyyy-mm-dd}` | to get the animal by vaccine dates |
 
 ###
 
-HTTP METHOD | ENDPOINT | DESCRIPTION
---- | --- | ---
-**POST** | `/api/v1/customers` | to create a new customer
-**GET** | `/api/v1/customers` | to get all customers
-**GET** | `/api/v1/customers/{id}` | to get one customer by id
-**PUT** | `/api/v1/customers` | to update the customer
-**DELETE** | `/api/v1/customers/{id}` | to delete the customer
-**GET** | `/api/v1/customers?nameLike={customer_name}` | to get the customer by name
-
+| HTTP METHOD | ENDPOINT                                     | DESCRIPTION                 |
+| ----------- | -------------------------------------------- | --------------------------- |
+| **POST**    | `/api/v1/customers`                          | to create a new customer    |
+| **GET**     | `/api/v1/customers`                          | to get all customers        |
+| **GET**     | `/api/v1/customers/{id}`                     | to get one customer by id   |
+| **PUT**     | `/api/v1/customers`                          | to update the customer      |
+| **DELETE**  | `/api/v1/customers/{id}`                     | to delete the customer      |
+| **GET**     | `/api/v1/customers?nameLike={customer_name}` | to get the customer by name |
 
 ### 4. Vaccination Management
 
@@ -102,15 +101,14 @@ HTTP METHOD | ENDPOINT | DESCRIPTION
 
 ### EndPoints
 
-HTTP METHOD | ENDPOINT | DESCRIPTION
---- | --- | ---
-**POST** | `/api/v1/vaccines` | to create a new vaccine
-**GET** | `/api/v1/vaccines` | to get all vaccines
-**GET** | `/api/v1/vaccines/{id}` | to get one vaccine by id
-**GET** | `/api/v1/vaccines/get-by-animal/{id}` | to get vaccines by animal id
-**PUT** | `/api/v1/vaccines` | to update the vaccine
-**DELETE** | `/api/v1/vaccines/{id}` | to delete the vaccine
-
+| HTTP METHOD | ENDPOINT                              | DESCRIPTION                  |
+| ----------- | ------------------------------------- | ---------------------------- |
+| **POST**    | `/api/v1/vaccines`                    | to create a new vaccine      |
+| **GET**     | `/api/v1/vaccines`                    | to get all vaccines          |
+| **GET**     | `/api/v1/vaccines/{id}`               | to get one vaccine by id     |
+| **GET**     | `/api/v1/vaccines/get-by-animal/{id}` | to get vaccines by animal id |
+| **PUT**     | `/api/v1/vaccines`                    | to update the vaccine        |
+| **DELETE**  | `/api/v1/vaccines/{id}`               | to delete the vaccine        |
 
 ### 5. Appointment Management
 
@@ -124,18 +122,34 @@ HTTP METHOD | ENDPOINT | DESCRIPTION
 
 ### EndPoints
 
-HTTP METHOD | ENDPOINT | DESCRIPTION
---- | --- | ---
-**POST** | `/api/v1/appointments` | to create a new appointment
-**GET** | `/api/v1/appointments` | to get all appointments
-**GET** | `/api/v1/appointments/{id}` | to get one appointment by id
-**GET** | `/api/v1/appointments/available-date-and-doctor?startDate={yyyy-mm-dd}&endDate={yyyy-mm-dd}&doctorName={doctor_name}` | to get appointments by doctor name
-**GET** | `/api/v1/appointments/available-date-and-doctor?startDate={yyyy-mm-dd}&endDate={yyyy-mm-dd}&doctorName={animal_name}` | to get appointments by animal name
-**PUT** | `/api/v1/appointments` | to update the appointment
-**DELETE** | `/api/v1/appointments/{id}` | to delete the appointment
+| HTTP METHOD | ENDPOINT                                                                                                              | DESCRIPTION                        |
+| ----------- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| **POST**    | `/api/v1/appointments`                                                                                                | to create a new appointment        |
+| **GET**     | `/api/v1/appointments`                                                                                                | to get all appointments            |
+| **GET**     | `/api/v1/appointments/{id}`                                                                                           | to get one appointment by id       |
+| **GET**     | `/api/v1/appointments/available-date-and-doctor?startDate={yyyy-mm-dd}&endDate={yyyy-mm-dd}&doctorName={doctor_name}` | to get appointments by doctor name |
+| **GET**     | `/api/v1/appointments/available-date-and-doctor?startDate={yyyy-mm-dd}&endDate={yyyy-mm-dd}&doctorName={animal_name}` | to get appointments by animal name |
+| **PUT**     | `/api/v1/appointments`                                                                                                | to update the appointment          |
+| **DELETE**  | `/api/v1/appointments/{id}`                                                                                           | to delete the appointment          |
+
+### 6. Reports Management
+
+- **Register Reports**: Add new report for an appointment.
+- **Update Report Information**: Modify information about reports.
+- **View Reports**: Retrieve a list of all reports.
+- **Delete Vaccinations**: Remove reports from the system.
+
+### EndPoints
+
+| HTTP METHOD | ENDPOINT               | DESCRIPTION            |
+| ----------- | ---------------------- | ---------------------- |
+| **POST**    | `/api/v1/reports`      | to create a new report |
+| **GET**     | `/api/v1/reports`      | to get all reports     |
+| **PUT**     | `/api/v1/reports`      | to update the report   |
+| **DELETE**  | `/api/v1/reports/{id}` | to delete the report   |
 
 You can also access the API Endpoints through the following Postman collection:
-https://api.postman.com/collections/31485402-034d6637-60d4-44fa-8774-8311690d0837?access_key=PMAT-01HHF5FTMD54RSRY5NYD2BQY7F
+https://api.postman.com/collections/31485402-034d6637-60d4-44fa-8774-8311690d0837?access_key=PMAT-01HSB9ETTBJZABT1F5V9YPM1RX
 
 ---
 
@@ -143,4 +157,4 @@ https://api.postman.com/collections/31485402-034d6637-60d4-44fa-8774-8311690d083
 
 You can see the UML Diagram below for the application.
 
-
+![Alt Text](diagram.png/)

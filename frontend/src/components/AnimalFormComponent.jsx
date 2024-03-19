@@ -82,6 +82,7 @@ const AnimalFormComponent = ({ isEdit, onSubmitHandler, selectedAnimal }) => {
     setBreedValue("");
     setGenderValue("");
     setColourValue("");
+    setCustomerValue("");
     setDateOfBirthValue(dayjs(new Date()));
   };
 

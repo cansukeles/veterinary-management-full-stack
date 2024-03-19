@@ -19,6 +19,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import AppointmentFormComponent from "../components/AppointmentFormComponent";
 import AppointmentFilterComponent from "../components/AppointmentFilterComponent";
+import SnackbarComponent from "../components/SnackbarComponent";
 import {
   fetchAnimals,
   fetchDoctors,
@@ -58,6 +59,8 @@ const AppointmentsPage = () => {
   const dispatch = useDispatch();
   const appointmentsData = useSelector((state) => state.appointments);
 
+  const [snackbarMessage, setSnackbarMessage] = useState(false);
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [appointments, setAppointments] = useState([]);
@@ -81,16 +84,20 @@ const AppointmentsPage = () => {
   const handleCreateAppointment = async (requestBody) => {
     try {
       await dispatch(createAppointment(requestBody)).unwrap();
+      setSnackbarMessage("Appointment is created.");
     } catch (err) {
       console.error("Failed to create appointment: ", err);
+      setSnackbarMessage("Failed to create appointment.");
     }
   };
 
   const handleUpdateAppointment = async (requestBody) => {
     try {
       await dispatch(updateAppointment(requestBody)).unwrap();
+      setSnackbarMessage("Appointment is updated.");
     } catch (err) {
       console.error("Failed to update the appointment: ", err);
+      setSnackbarMessage("Failed to update the appointment.");
     } finally {
       handleCloseModal();
     }
@@ -99,8 +106,10 @@ const AppointmentsPage = () => {
   const handleDeleteAppointment = async (id) => {
     try {
       await dispatch(deleteAppointment(id));
+      setSnackbarMessage("Appointment is deleted.");
     } catch (err) {
       console.error("Failed to delete the appointment: ", err);
+      setSnackbarMessage("Failed to delete the appointment.");
     }
   };
 
@@ -230,6 +239,7 @@ const AppointmentsPage = () => {
           />
         </Box>
       </Modal>
+      <SnackbarComponent snackbarMessage={snackbarMessage} />
     </div>
   );
 };

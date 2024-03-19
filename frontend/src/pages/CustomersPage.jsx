@@ -13,14 +13,13 @@ import {
   IconButton,
   Modal,
   Box,
-  Snackbar,
 } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import CustomerFormComponent from "../components/CustomerFormComponent";
 import CustomerFilterComponent from "../components/CustomerFilterComponent";
+import SnackbarComponent from "../components/SnackbarComponent";
 import {
   deleteCustomer,
   updateCustomer,
@@ -58,30 +57,7 @@ const CustomersPage = () => {
   const dispatch = useDispatch();
   const customersData = useSelector((state) => state.customers);
 
-  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const handleOpenSnackbar = () => {
-    setOpenSnackbar(true);
-  };
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenSnackbar(false);
-  };
-  const action = (
-    <Box>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleCloseSnackbar}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </Box>
-  );
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -119,6 +95,7 @@ const CustomersPage = () => {
       setSnackbarMessage("Customer is created.");
     } catch (err) {
       console.error("Failed to create customer: ", err);
+      setSnackbarMessage("Failed to create customer.");
     } finally {
       handleOpenSnackbar();
     }
@@ -141,6 +118,7 @@ const CustomersPage = () => {
       setSnackbarMessage("Customer is updated.");
     } catch (err) {
       console.error("Failed to update the customer: ", err);
+      setSnackbarMessage("Failed to update the customer.");
     } finally {
       handleCloseModal();
       handleOpenSnackbar();
@@ -153,6 +131,7 @@ const CustomersPage = () => {
       setSnackbarMessage("Customer is deleted.");
     } catch (err) {
       console.error("Failed to delete the customer: ", err);
+      setSnackbarMessage("Failed to delete the customer.");
     } finally {
       handleOpenSnackbar();
     }
@@ -262,13 +241,7 @@ const CustomersPage = () => {
           />
         </Box>
       </Modal>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-        message={snackbarMessage}
-        action={action}
-      />
+      <SnackbarComponent snackbarMessage={snackbarMessage} />
     </div>
   );
 };

@@ -18,6 +18,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import ReportFormComponent from "../components/ReportFormComponent";
+import SnackbarComponent from "../components/SnackbarComponent";
 import {
   fetchAppointments,
   deleteReport,
@@ -58,6 +59,8 @@ const ReportsPage = () => {
   const dispatch = useDispatch();
   const reportsData = useSelector((state) => state.reports);
 
+  const [snackbarMessage, setSnackbarMessage] = useState(false);
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -72,8 +75,10 @@ const ReportsPage = () => {
   const handleCreateReport = async (requestBody) => {
     try {
       await dispatch(createReport(requestBody)).unwrap();
+      setSnackbarMessage("Report is created.");
     } catch (err) {
       console.error("Failed to create report: ", err);
+      setSnackbarMessage("Failed to create report.");
     } finally {
       dispatch(fetchReports());
     }
@@ -82,8 +87,10 @@ const ReportsPage = () => {
   const handleUpdateReport = async (requestBody) => {
     try {
       await dispatch(updateReport(requestBody)).unwrap();
+      setSnackbarMessage("Report is updated.");
     } catch (err) {
       console.error("Failed to update the report: ", err);
+      setSnackbarMessage("Failed to update the report.");
     } finally {
       handleCloseModal();
       dispatch(fetchReports());
@@ -93,8 +100,10 @@ const ReportsPage = () => {
   const handleDeleteReport = async (id) => {
     try {
       await dispatch(deleteReport(id));
+      setSnackbarMessage("Report is deleted.");
     } catch (err) {
       console.error("Failed to delete the report: ", err);
+      setSnackbarMessage("Failed to delete the report.");
     }
   };
 
@@ -192,7 +201,6 @@ const ReportsPage = () => {
         />
       </Paper>
       <div style={{ height: 20 }} />
-
       {/* new report form */}
       <ReportFormComponent
         isEdit={false}
@@ -213,6 +221,7 @@ const ReportsPage = () => {
           />
         </Box>
       </Modal>
+      <SnackbarComponent snackbarMessage={snackbarMessage} />
     </div>
   );
 };

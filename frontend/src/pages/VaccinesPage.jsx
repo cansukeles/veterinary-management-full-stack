@@ -19,6 +19,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import VaccineFormComponent from "../components/VaccineFormComponent";
 import VaccineFilterComponent from "../components/VaccineFilterComponent";
+import SnackbarComponent from "../components/SnackbarComponent";
 import {
   fetchAnimals,
   deleteVaccine,
@@ -58,6 +59,9 @@ const VaccinesPage = () => {
   const dispatch = useDispatch();
   const vaccinesData = useSelector((state) => state.vaccines);
 
+  // snackbar state
+  const [snackbarMessage, setSnackbarMessage] = useState(false);
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -88,16 +92,20 @@ const VaccinesPage = () => {
   const handleCreateVaccine = async (requestBody) => {
     try {
       await dispatch(createVaccine(requestBody)).unwrap();
+      setSnackbarMessage("Vaccine is created.");
     } catch (err) {
       console.error("Failed to create vaccine: ", err);
+      setSnackbarMessage("Failed to create vaccine.");
     }
   };
 
   const handleUpdateVaccine = async (requestBody) => {
     try {
       await dispatch(updateVaccine(requestBody)).unwrap();
+      setSnackbarMessage("Vaccine is updated.");
     } catch (err) {
       console.error("Failed to update the vaccine: ", err);
+      setSnackbarMessage("Failed to update the vaccine.");
     } finally {
       handleCloseModal();
     }
@@ -106,8 +114,10 @@ const VaccinesPage = () => {
   const handleDeleteVaccine = async (id) => {
     try {
       await dispatch(deleteVaccine(id));
+      setSnackbarMessage("Vaccine is deleted.");
     } catch (err) {
       console.error("Failed to delete the vaccine: ", err);
+      setSnackbarMessage("Failed to delete the vaccine.");
     }
   };
 
@@ -204,7 +214,6 @@ const VaccinesPage = () => {
         />
       </Paper>
       <div style={{ height: 20 }} />
-
       {/* new vaccine form */}
       <VaccineFormComponent
         isEdit={false}
@@ -220,6 +229,7 @@ const VaccinesPage = () => {
           />
         </Box>
       </Modal>
+      <SnackbarComponent snackbarMessage={snackbarMessage} />
     </div>
   );
 };

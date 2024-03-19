@@ -10,22 +10,27 @@ import VaccinesPage from "./pages/VaccinesPage";
 import DoctorsPage from "./pages/DoctorsPage";
 import AnimalsPage from "./pages/AnimalsPage";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <div>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/customers" element={<CustomersPage />} />
-          <Route path="/appointments" element={<AppointmentsPage />} />
-          <Route path="/reports" element={<ReportsPage />} />
-          <Route path="/vaccines" element={<VaccinesPage />} />
-          <Route path="/doctors" element={<DoctorsPage />} />
-          <Route path="/animals" element={<AnimalsPage />} />
-        </Routes>
-      </Router>
+      <div className="app-div">
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/customers" element={<CustomersPage />} />
+            <Route path="/appointments" element={<AppointmentsPage />} />
+            <Route path="/reports" element={<ReportsPage />} />
+            <Route path="/vaccines" element={<VaccinesPage />} />
+            <Route path="/doctors" element={<DoctorsPage />} />
+            <Route path="/animals" element={<AnimalsPage />} />
+          </Routes>
+        </Router>
+      </div>
+
+      <Footer />
     </div>
   );
 }

@@ -13,14 +13,13 @@ import {
   IconButton,
   Modal,
   Box,
-  Snackbar,
 } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import DoctorFormComponent from "../components/DoctorFormComponent";
 import AvailableDateFormComponent from "../components/AvailableDateFormComponent";
+import SnackbarComponent from "../components/SnackbarComponent";
 import {
   deleteDoctor,
   updateDoctor,
@@ -71,30 +70,7 @@ const DoctorsPage = () => {
 
   const [availableDates, setAvailableDates] = useState([]);
 
-  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const handleOpenSnackbar = () => {
-    setOpenSnackbar(true);
-  };
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenSnackbar(false);
-  };
-  const action = (
-    <Box>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleCloseSnackbar}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </Box>
-  );
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -137,6 +113,7 @@ const DoctorsPage = () => {
       setSnackbarMessage("Doctor is created.");
     } catch (err) {
       console.error("Failed to create doctor: ", err);
+      setSnackbarMessage("Failed to create doctor.");
     } finally {
       handleOpenSnackbar();
     }
@@ -159,6 +136,7 @@ const DoctorsPage = () => {
       setSnackbarMessage("Doctor is updated.");
     } catch (err) {
       console.error("Failed to update the doctor: ", err);
+      setSnackbarMessage("Failed to update the doctor.");
     } finally {
       handleCloseModal();
       handleOpenSnackbar();
@@ -171,6 +149,7 @@ const DoctorsPage = () => {
       setSnackbarMessage("Doctor is deleted.");
     } catch (err) {
       console.error("Failed to delete the doctor: ", err);
+      setSnackbarMessage("Failed to delete the doctor.");
     } finally {
       handleOpenSnackbar();
     }
@@ -179,16 +158,20 @@ const DoctorsPage = () => {
   const handleCreateAvailableDate = async (requestBody) => {
     try {
       await dispatch(createAvailableDate(requestBody)).unwrap();
+      setSnackbarMessage("Available date is created.");
     } catch (err) {
       console.error("Failed to create available date: ", err);
+      setSnackbarMessage("Failed to create available date.");
     }
   };
 
   const handleUpdateAvailableDate = async (requestBody) => {
     try {
       await dispatch(updateAvailableDate(requestBody)).unwrap();
+      setSnackbarMessage("Available date is updated.");
     } catch (err) {
       console.error("Failed to update the available date: ", err);
+      setSnackbarMessage("Failed to update the available date.");
     } finally {
       handleClosedAvailableDateModal();
     }
@@ -197,8 +180,10 @@ const DoctorsPage = () => {
   const handleDeleteAvailableDate = async (id) => {
     try {
       await dispatch(deleteAvailableDate(id));
+      setSnackbarMessage("Available date is deleted.");
     } catch (err) {
       console.error("Failed to delete the available date: ", err);
+      setSnackbarMessage("Failed to delete the available date.");
     }
   };
 
@@ -318,13 +303,6 @@ const DoctorsPage = () => {
             />
           </Box>
         </Modal>
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={6000}
-          onClose={handleCloseSnackbar}
-          message={snackbarMessage}
-          action={action}
-        />
       </div>
       <div>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -348,7 +326,11 @@ const DoctorsPage = () => {
               {/* available date list */}
               <TableBody>
                 {availableDates
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .slice(
+                    availableDatesPage * availableDatesRowsPerPage,
+                    availableDatesPage * availableDatesRowsPerPage +
+                      availableDatesRowsPerPage
+                  )
                   .map((row, rowIndex) => {
                     return (
                       <TableRow
@@ -413,6 +395,7 @@ const DoctorsPage = () => {
           </Box>
         </Modal>
       </div>
+      <SnackbarComponent snackbarMessage={snackbarMessage} />
     </div>
   );
 };

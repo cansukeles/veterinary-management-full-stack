@@ -13,14 +13,13 @@ import {
   IconButton,
   Modal,
   Box,
-  Snackbar,
 } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import AnimalFormComponent from "../components/AnimalFormComponent";
 import AnimalFilterComponent from "../components/AnimalFilterComponent";
+import SnackbarComponent from "../components/SnackbarComponent";
 import {
   deleteAnimal,
   createAnimal,
@@ -62,30 +61,8 @@ const AnimalsPage = () => {
   const dispatch = useDispatch();
   const animalsData = useSelector((state) => state.animals);
 
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  // snackbar state
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const handleOpenSnackbar = () => {
-    setOpenSnackbar(true);
-  };
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenSnackbar(false);
-  };
-  const action = (
-    <Box>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleCloseSnackbar}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </Box>
-  );
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -132,6 +109,7 @@ const AnimalsPage = () => {
       setSnackbarMessage("Animal is created.");
     } catch (err) {
       console.error("Failed to create animal: ", err);
+      setSnackbarMessage("Failed to create animal.");
     } finally {
       handleOpenSnackbar();
     }
@@ -155,6 +133,7 @@ const AnimalsPage = () => {
       setSnackbarMessage("Animal is updated.");
     } catch (err) {
       console.error("Failed to update the animal: ", err);
+      setSnackbarMessage("Failed to update the animal.");
     } finally {
       handleCloseModal();
       handleOpenSnackbar();
@@ -164,9 +143,10 @@ const AnimalsPage = () => {
   const handleDeleteAnimal = async (id) => {
     try {
       await dispatch(deleteAnimal(id));
-      setSnackbarMessage("Customer is deleted.");
+      setSnackbarMessage("Animal is deleted.");
     } catch (err) {
       console.error("Failed to delete the animal: ", err);
+      setSnackbarMessage("Failed to delete the animal.");
     } finally {
       handleOpenSnackbar();
     }
@@ -279,13 +259,7 @@ const AnimalsPage = () => {
           />
         </Box>
       </Modal>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-        message={snackbarMessage}
-        action={action}
-      />
+      <SnackbarComponent snackbarMessage={snackbarMessage} />
     </div>
   );
 };
