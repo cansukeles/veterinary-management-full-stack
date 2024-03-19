@@ -5,7 +5,6 @@ const HomePage = () => {
     <>
       <div className="home-div">
         <img
-          // src="https://drive.google.com/file/d/10SOkRR3Gk5rEeHpaC3zEy5xCNlruWrfs/view?usp=sharing"
           src="https://drive.google.com/thumbnail?id=10SOkRR3Gk5rEeHpaC3zEy5xCNlruWrfs"
           width={550}
           alt="Animals"
